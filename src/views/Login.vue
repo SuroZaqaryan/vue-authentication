@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "LoginUser",
 
   data() {
     return {
