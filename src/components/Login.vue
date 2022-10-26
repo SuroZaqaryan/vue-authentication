@@ -51,23 +51,10 @@ export default {
   methods: {
     async login() {
       const user = new FormData();
-
       user.append("username", this.form.username);
       user.append("password", this.form.password);
 
-      const settings = {
-        method: 'POST',
-        body: user,
-        mode: 'no-cors',
-        redirect: 'follow'
-      };
-
-      const res = await fetch('https://gabbyblog.herokuapp.com/login', settings);
-      const data = await res.text();
-
-      console.log(data)
-
-      return data;
+      await this.$store.dispatch('LogIn', user);
     },
   },
 }

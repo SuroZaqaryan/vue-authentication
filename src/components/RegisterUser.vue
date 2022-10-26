@@ -56,20 +56,7 @@ export default {
     methods: {
         async register() {
             let form = JSON.parse(JSON.stringify(this.form))
-
-            var settings = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(form),
-                mode: 'no-cors',
-                redirect: 'follow'
-            };
-
-            const res = await fetch('https://gabbyblog.herokuapp.com/register', settings);
-            const data = await res.text();
-            return data;
+            await this.$store.dispatch('Register', form);
         }
     },
 }
