@@ -1,29 +1,35 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 
-import RegisterUser from '@/components/RegisterUser'
-import LoginComponent from '@/components/Login'
+import RegisterUser from "@/views/RegisterUser";
+import Login from "@/views/Login";
+import Profile from "@/views/ProfileUser";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            redirect: {
-                name: 'login'
-            }
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: RegisterUser
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: LoginComponent
-        },
-    ]
-})
+  mode: "history",
+  routes: [
+    {
+      path: "/",
+      redirect: {
+        name: "login",
+      },
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: RegisterUser,
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+  ],
+});

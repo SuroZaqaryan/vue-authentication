@@ -1,25 +1,42 @@
 <template>
   <div class="form-wrapper login">
     <form @submit.prevent="login">
-
       <div class="login__title">
         <h1>Authentication</h1>
         <h3>Welcome to our application</h3>
-        <p>New here? <router-link tag="span" to="/register">Create an account</router-link>
+        <p>
+          New here?
+          <router-link tag="span" to="/register">Create an account</router-link>
         </p>
       </div>
 
       <div class="login__fields">
         <label for="name">Username</label>
-        <input type="name" v-model="form.username" id="name" name="name" placeholder="Username" maxlength="30" required>
+        <input
+          type="name"
+          v-model="form.username"
+          id="name"
+          name="name"
+          placeholder="Username"
+          maxlength="30"
+          required
+        />
 
         <br /><br />
 
         <label for="Password">Password</label>
-        <input type="password" v-model="form.password" id="Password" name="password" placeholder="Password"
-          autocomplete="on" maxlength="25" required>
+        <input
+          type="password"
+          v-model="form.password"
+          id="Password"
+          name="password"
+          placeholder="Password"
+          autocomplete="on"
+          maxlength="25"
+          required
+        />
 
-        <input type="submit" value="Sign in">
+        <input type="submit" value="Sign in" />
       </div>
     </form>
 
@@ -36,7 +53,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
 
   data() {
     return {
@@ -45,7 +62,7 @@ export default {
         password: "",
       },
       errorMessage: "",
-    }
+    };
   },
 
   methods: {
@@ -54,12 +71,11 @@ export default {
       user.append("username", this.form.username);
       user.append("password", this.form.password);
 
-      await this.$store.dispatch('LogIn', user);
+      await this.$store.dispatch("LogIn", user);
+      this.$router.push("/profile");
     },
   },
-}
+};
 </script>
 
-<style>
-@import '@/assets/style.css';
-</style>
+<style scoped src="@/assets/form.css"></style>

@@ -57,11 +57,10 @@ export default {
         async register() {
             let form = JSON.parse(JSON.stringify(this.form))
             await this.$store.dispatch('Register', form);
+            this.$router.push("/profile");
         }
     },
 }
 </script>
   
-<style>
-@import '@/assets/style.css';
-</style>
+<style scoped src="@/assets/form.css"></style>
