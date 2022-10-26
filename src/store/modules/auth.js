@@ -1,71 +1,38 @@
-const baseURL = "https://gabbyblog.herokuapp.com";
-
-const state = {
-  user: null,
-};
-
-const getters = {
-  isAuthenticated: (state) => !!state.user,
-  StateUser: (state) => state.user,
-};
+import axios from "axios";
 
 const actions = {
-  async Register({ dispatch }, form) {
-    const settings = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-      mode: "no-cors",
-      redirect: "follow",
-    };
+    async Register({ dispatch }, form) {
+        await axios.post('register', form)
 
-    const res = await fetch(`${baseURL}/register`, settings);
-    const data = await res.text();
+        let UserForm = new FormData();
+        UserForm.append("username", form.username);
+        UserForm.append("password", form.password);
 
-    let UserForm = new FormData();
-    UserForm.append("username", form.username);
-    UserForm.append("password", form.password);
+        await dispatch("LogIn", UserForm);
+    },
 
-    await dispatch("LogIn", UserForm);
+    async LogIn({ commit }, user) {
+        await axios.post("login", user);
+        await commit("setUser", user.get("username"));
+    },
 
-    return data;
-  },
-
-  async LogIn({ commit }, user) {
-    const settings = {
-      method: "POST",
-      body: user,
-      mode: "no-cors",
-      redirect: "follow",
-    };
-
-    const res = await fetch(`${baseURL}/login`, settings);
-    const data = await res.text();
-    await commit("setUser", user.get("username"));
-    return data;
-  },
-
-  async LogOut({ commit }) {
-    let user = null;
-    commit("logout", user);
-  },
+    async LogOut({ commit }) {
+        commit("logout");
+    },
 };
 
 const mutations = {
-  setUser(state, username) {
-    state.user = username;
-  },
+    setUser(state, username) {
+        localStorage.setItem('username', username);
+        console.log(state);
+    },
 
-  logout(state, user) {
-    state.user = user;
-  },
+    logout() {
+        localStorage.removeItem("username");
+    },
 };
 
 export default {
-  state,
-  getters,
-  actions,
-  mutations,
+    actions,
+    mutations,
 };

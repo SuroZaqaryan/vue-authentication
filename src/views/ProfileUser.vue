@@ -7,7 +7,7 @@
 
       <nav>
         <ul>
-          <li>{{ userName }}</li>
+          <li>{{ username }}</li>
           <li @click="logout">Logout</li>
         </ul>
       </nav>
@@ -16,12 +16,8 @@
     <main class="user__data">
       <section>
         <div class="user__info">
-          <div>
-            <p>Synchro</p>
-          </div>
-          <div>
-            <p>Synchro</p>
-          </div>
+          <p>User name:</p>
+          <p>{{ username }}</p>
         </div>
       </section>
     </main>
@@ -30,10 +26,14 @@
 
 <script>
 export default {
-  computed: {
-    userName() {
-      return this.$store.getters.StateUser;
-    },
+  data() {
+    return {
+      username: "",
+    }
+  },
+
+  mounted() {
+    this.username = localStorage.getItem('username')
   },
 
   methods: {
@@ -45,4 +45,6 @@ export default {
 };
 </script>
 
-<style scoped src="@/assets/profile.css"></style>
+<style scoped src="@/assets/profile.css">
+
+</style>

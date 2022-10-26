@@ -11,6 +11,10 @@ export default {
 </script>
 
 <style>
+#app {
+  height: 100vh;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;

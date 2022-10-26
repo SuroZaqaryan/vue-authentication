@@ -33,7 +33,7 @@
         </div>
 
         <div class="login__error">
-            <span>{{ errorMessage }}</span>
+            <span>Username already exists</span>
         </div>
     </div>
 </template>
@@ -49,18 +49,26 @@ export default {
                 full_name: "",
                 password: "",
             },
-            errorMessage: "",
+            errorMessage: false,
         }
     },
 
     methods: {
         async register() {
             let form = JSON.parse(JSON.stringify(this.form))
-            await this.$store.dispatch('Register', form);
-            this.$router.push("/profile");
+
+            try {
+                await this.$store.dispatch('Register', form);
+                this.$router.push("/profile");
+                this.errorMessage = false;
+            } catch (err) {
+                this.errorMessage = true;
+            }
         }
     },
 }
 </script>
   
-<style scoped src="@/assets/form.css"></style>
+<style scoped src="@/assets/form.css">
+
+</style>

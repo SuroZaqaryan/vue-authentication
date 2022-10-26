@@ -12,29 +12,14 @@
 
       <div class="login__fields">
         <label for="name">Username</label>
-        <input
-          type="name"
-          v-model="form.username"
-          id="name"
-          name="name"
-          placeholder="Username"
-          maxlength="30"
-          required
-        />
+        <input type="name" v-model="form.username" id="name" name="name" placeholder="Username" maxlength="30"
+          required />
 
         <br /><br />
 
         <label for="Password">Password</label>
-        <input
-          type="password"
-          v-model="form.password"
-          id="Password"
-          name="password"
-          placeholder="Password"
-          autocomplete="on"
-          maxlength="25"
-          required
-        />
+        <input type="password" v-model="form.password" id="Password" name="password" placeholder="Password"
+          autocomplete="on" maxlength="25" required />
 
         <input type="submit" value="Sign in" />
       </div>
@@ -45,8 +30,8 @@
       <router-link tag="button" to="/register">No account yet?</router-link>
     </div>
 
-    <div class="login__error">
-      <span>{{ errorMessage }}</span>
+    <div v-if="errorMessage" class="login__error">
+      <span>Username or Password is incorrect</span>
     </div>
   </div>
 </template>
@@ -61,7 +46,7 @@ export default {
         username: "",
         password: "",
       },
-      errorMessage: "",
+      errorMessage: false,
     };
   },
 
@@ -71,11 +56,19 @@ export default {
       user.append("username", this.form.username);
       user.append("password", this.form.password);
 
-      await this.$store.dispatch("LogIn", user);
-      this.$router.push("/profile");
+      try {
+        await this.$store.dispatch("LogIn", user);
+        this.$router.push("/profile");
+        this.errorMessage = false;
+      } catch (error) {
+        this.errorMessage = true;
+      }
+
     },
   },
 };
 </script>
 
-<style scoped src="@/assets/form.css"></style>
+<style scoped src="@/assets/form.css">
+
+</style>

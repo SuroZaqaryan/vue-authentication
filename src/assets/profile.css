@@ -29,7 +29,7 @@ nav ul {
 
 nav ul li {
     list-style-type: none;
-    font-size: 15px;
+    font-size: 16px;
     color: #fff;
     cursor: pointer;
 }
@@ -41,20 +41,23 @@ nav ul li {
     margin: 4rem auto;
 }
 
-.user__data .user__info>div {
+.user__data .user__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
     background: #47417105;
     border-bottom: 1px solid #47417136;
     margin-bottom: 0.3rem;
-    padding: 0.5rem;
     transition: 0.2s;
     cursor: pointer;
 }
 
-.user__data .user__info>div:hover {
+.user__data .user__info:hover {
     background: #47417109;
 }
 
-.user__data .user__info>div p {
+.user__data .user__info p {
     font-size: 16px;
     font-family: system-ui;
     font-weight: 500;
